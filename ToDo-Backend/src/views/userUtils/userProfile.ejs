@@ -1,0 +1,126 @@
+<%- include("../baseFiles/header.ejs") %>
+  <%- include("../baseFiles/navbar.ejs") %>
+    <%- include("../baseFiles/messages.ejs") %>
+
+
+
+      <%# add new todo model button %>
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addNewTodo">
+          <i class="fa fa-plus"></i> Add new Todo
+        </button>
+
+        <!-- add new todo Modal -->
+        <div class="modal fade m-3" id="addNewTodo" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content m-3">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Todo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form action="/api/todos/addNewTodo" method="post" class="m-3">
+                <div class="row ">
+                  <div class="col-7">
+
+                    <div class="mb-3">
+                      <label for="todoName" class="form-label">Todo Name</label>
+                      <input type="text" class="form-control" id="todoName" placeholder="Enter Todo Name"
+                        name="todoName" required />
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="mb-3">
+                      <label for="completeDate" class="form-label">Complete Date</label>
+                      <input type="date" class="form-control" id="completeDate" name="completeDate" required />
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea type="text" class="form-control" id="description" placeholder="Enter Todo description"
+                    name="description" required></textarea>
+                </div>
+
+                <button class="btn btn-success " type="submit">Add New Todo</button>
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+        </div>
+
+
+        <% var sr=1 %>
+          <div class="row w-100 m-2">
+            <table class="col-11 m-auto">
+              <thead>
+                <th>Srial No.</th>
+                <th>Todo Name </th>
+                <th>Description</th>
+                <th>completeDate </th>
+                <th>Complete Mark</th>
+                <th>Activity</th>
+              </thead>
+              <hr />
+              <tbody>
+                <% userData?.todoList?.forEach(todo=> { %>
+                  <tr>
+
+                    <td>
+                      <%= sr %>
+                    </td>
+                    <td>
+                      <%= todo.todoName %>
+                    </td>
+                    <td>
+                      <%= todo.description %>
+                    </td>
+                    <td>
+                      <%= todo.completeDate?.toLocaleDateString() %>
+                    </td>
+                    <td>
+                      <div class="mx-5">
+                        <% if (todo.isComplete) { %>
+                          <i class="fa fa-check-double text-success"></i>
+                          <% } else { %>
+                            <i class="fa fa-hourglass-half fs-4"></i>
+                            <% } %>
+                      </div>
+                    </td>
+                    <td>
+                      <form action="" method="get" class="d-inline">
+                        <button class="btn" type="button">
+                          <a href="/user/<%= userData._id %>/<%= todo?._id %>"><i class="fas fa-edit text-success"></i>
+                          </a>
+                        </button>
+                      </form>
+                      <form action="/api/todos/removeTodo/<%= todo?._id %>" method="post" class="d-inline"><button
+                          class="btn" type="submit"><a href=""><i class="fas fa-trash text-danger"></i></a></button>
+                      </form>
+                      <% if (todo?.isComplete) { %>
+                        <form action="/api/todos/markToUnComplete/<%= todo?._id %>" method="post" class="d-inline">
+                          <button class="btn" type="submit"><a href="" class="text-decoration-none">
+                              <i class="fw-bold fs-5">X</i>
+                        </form>
+                        <% } else { %>
+                          <form action="/api/todos/markToComplete/<%= todo?._id %>" method="post" class="d-inline">
+                            <button class="btn" type="submit"><a href=""><i class="fa fa-check"></i></a></button>
+                          </form>
+
+                          <% } %>
+
+                    </td>
+                    <% sr++ %>
+                  </tr>
+                  <% }) %>
+              </tbody>
+            </table>
+            <hr />
+          </div>
+          <div>
+
+
+          </div>
+
+          <%- include("../baseFiles/footer.ejs") %>
