@@ -1,0 +1,65 @@
+<%- include("../partials/header.ejs") %>
+
+<h1
+class="p-4 fw-bold bgColor-mySet-orange"
+>
+<p class="rounded border border-dark p-2 d-inline">Expence Tracker</p>
+</h1>
+
+<%- include("../partials/message.ejs") %>
+<div class="row w-100">
+  <div class="col-6 row m-auto mt-3">
+    <div class="col-9 rounded-4 mt-3 row m-auto bg-white">
+      <h2 class="pt-4 text-center col-8 m-auto">Login User</h2>
+    <form method="post" action="/backend/user/loginUser">
+      <div class="mb-2">
+        <label for="emailId"
+        class="form-label">Email Id</label>
+        <input 
+        type="email" 
+        placeholder="Enter Email"
+        class="form-control"
+        id="emailId"
+        name="emailId"
+        required
+        >
+      </div>
+      <div class="mb-2">
+        <label for="password"
+        class="form-label">Password</label>
+        <input 
+        type="password" 
+        placeholder="Enter password"
+        class="form-control"
+        id="password"
+        name="password"
+        required
+        >
+        <small
+        >Forget password,
+        <span class="text-primary"
+          ><a href="/user/resetUserPassword" class="text-decoration-none"
+            >click to reset</a
+          ></span
+        ></small
+      >
+      </div>
+      <button type="submit" class="btn btn-success ml-2">
+        <span class="fw-bold mx-1">Login</span></button
+      ><br />
+      <strong
+        >If not Register,
+        <a href="/user/register" class="text-decoration-none color-mySet-blue"
+          >Register here</a
+        ></strong
+      >
+    </form>
+    </div>
+  </div>
+<div class="col-6 row m-auto mt-3">
+  <div class="col-9 rounded-4 mt-3 row m-auto bg-white">
+    <h2 class="pt-4 text-center col-8 m-auto">About Project</h2>
+  </div>
+</div>
+</div>
+<%- include("../partials/footer.ejs") %>

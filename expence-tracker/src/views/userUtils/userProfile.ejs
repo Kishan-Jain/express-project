@@ -1,0 +1,100 @@
+<%- include("../partials/header.ejs") %>
+  <%- include("../partials/navbar.ejs") %>
+    <%- include("../partials/message.ejs") %>
+      <%# add new Expence details model button %>
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addNewExpencedetails">
+          <i class="fa fa-plus"></i> Add new Expence details
+        </button>
+
+        <!-- add new Expence details Modal -->
+        <div class="modal fade m-3" id="addNewExpencedetails" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content m-3">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Expence details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form action="/backend/expence/addNewExpence" method="post" class="m-3">
+                <div class="row ">
+                  <div class="col-7">
+
+                    <div class="mb-3">
+                      <label for="ExpencedetailTitle" class="form-label">Expence details Title</label>
+                      <input type="text" class="form-control" id="ExpencedetailTitle"
+                        placeholder="Enter Expence details Title" name="title" required />
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="mb-3">
+                      <label for="type" class="form-label">Type</label>
+                      <input type="text" class="form-control" id="type" name="type" placeholder="Enter Type" required />
+                    </div>
+                  </div>
+                </div>
+                <div class="row ">
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label for="methodOfPayment" class="form-label">Method of payment</label>
+                      <input type="text" class="form-control" id="methodOfPayment" placeholder="Enter Payment Method"
+                        name="methodOfPayment" required />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label for="amount" class="form-label">Amount</label>
+                      <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter amount"
+                        required />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea type="text" class="form-control" id="description" placeholder="Enter Expence description"
+                    name="description" required></textarea>
+                </div>
+
+                <button class="btn btn-success " type="submit">Add New Expence details</button>
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+        
+
+        <% if (userData?.expenceList?.length> 0) { %>
+          <% userData.expenceList.map( expence=> {%>
+            <p>
+              <%= expence.title %>
+            </p>
+            <p>
+              <%= expence.description %>
+            </p>
+            <p>
+              <%= expence.type %>
+            </p>
+            <p>
+              <%= expence.amount %>
+            </p>
+            <p>
+              <%= new Date(expence.createdAt) %>
+            </p>
+            </form>
+            <form action="/user/userProfile/expence/<%= expence._id %>" method="get">
+              <button type="submit">view Expence</button>
+            </form>
+            <form action="/user/userProfile/updateExpence/<%= expence._id %>" method="get">
+              <button type="submit">update Expence</button>
+            </form>
+            <form action="/backend/expence/removeExpence/<%= userData?._id %>/<%= expence?._id %>" method="post">
+              <button type="submit">remove Expence</button>
+            </form>
+            <hr />
+
+            <%}) %>
+              <% } %>
+
+
+                <%- include("../partials/footer.ejs") %>
