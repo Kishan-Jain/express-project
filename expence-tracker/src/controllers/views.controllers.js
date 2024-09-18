@@ -19,7 +19,7 @@ import {cookieExpire, cookieOptions} from "../constants.js"
 import UserModel from "../models/user.models.js"
 // controller for home page views
 export const homePage = AsyncHandler(async(req, res) => {
-  
+  return res.redirect("/user/login")
   const returnedData = {
     "title" : "Home Page",
     "errorMessage" : undefined,

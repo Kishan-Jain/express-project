@@ -4,7 +4,7 @@ import userRouter from "./routes/userUtils.routes.js"
 import expenceRouter from "./routes/expence.routes.js"
 import viewsRouter from "./routes/viewsRoute.routes.js"
 import { homePage } from "./controllers/views.controllers.js"
-import { ifAlReadyLogin} from "./middlewares/auth.middlewares.js"
+
 
 const app = express()
 
@@ -20,6 +20,6 @@ app.use("/backend/user", userRouter)
 app.use("/backend/expence", expenceRouter)
 app.use("/user", viewsRouter)
 
-app.get("/", ifAlReadyLogin,homePage)
+app.get("/", homePage)
 
 export default app
