@@ -11,7 +11,7 @@ dotenv.config({
 // declare useful variables here
 const port = process.env.PORT
 const Db_URI = process.env.DB_URI
-const Db_Name = process.env.Db_Name
+const Db_Name = process.env.DB_NAME
 
 
 try {
